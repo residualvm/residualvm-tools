@@ -323,7 +323,6 @@ int main(int argc, char *argv[]) {
 	struct mscabd_cabinet *cab;
 	int i;
 	enum act action;
-	char *(*filter) (struct mscabd_file *);
 
 	action = UNKNOWN_ACTION;
 
