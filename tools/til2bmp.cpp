@@ -124,7 +124,7 @@ void LucasBitMap::MoreBits(){
 		}
 		delete _data;
 		_data = newData;
-		_bpp = 4;
+		_bpp=4;
 	}
 }
 
@@ -169,7 +169,7 @@ void LucasBitMap::BGR2RGB(){
 		for(uint32_t i = 0; i < end; i += 4){
 			char temp = _data[i + 2];
 			_data[i + 2] = _data[i];
-			_data[i] = temp;
+		_data[i] = temp;
 		}
 	}else if(_bpp==2){
 		MoreBits();	
@@ -194,6 +194,7 @@ LucasBitMap* MakeFullPicture(LucasBitMap** bits){
 	
 	char* target = fullImage->_data;
 	for(int i = 0;i < 256;i++){
+
 		/* This can be modified to actually use the last 32 lines.
 		 * We simply put the lower half on line 223 and down to line 32, 
 		 * then skip the last 32.
