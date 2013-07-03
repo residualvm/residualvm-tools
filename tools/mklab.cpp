@@ -100,12 +100,13 @@ static char *appendPath(const char *name, const char *dir) {
 }
 
 static void countFiles(lab_header *head, DIR *dir, const char *dirname, int additionalLen) {
+	struct stat s;
 	struct dirent *dirfile;
 	while ((dirfile = readdir(dir))) {
 		if (!strcmp(dirfile->d_name, ".") || !strcmp(dirfile->d_name, ".."))
 			continue;
 
-		if (dirfile->d_type == S_IFDIR) {
+		if (s.st_mode & S_IFDIR) {
 			char *d = appendPath(dirfile->d_name, dirname);
 			DIR *subdir = opendir(d);
 			countFiles(head, subdir, d, additionalLen + strlen(dirfile->d_name) + 1);
@@ -122,12 +123,13 @@ static void createEntries(DIR *dir, lab_entry *entries, char *str_table, const c
 	static uint32_t num_entry = 0;
 	static uint32_t name_offset = 0;
 	static char *str_offset = str_table;
+	struct stat s;
 	struct dirent *dirfile;
 	while ((dirfile = readdir(dir))) {
 		if (!strcmp(dirfile->d_name, ".") || !strcmp(dirfile->d_name, ".."))
 			continue;
 
-		if (dirfile->d_type == S_IFDIR) {
+		if (s.st_mode & S_IFDIR) {
 			char *d = appendPath(dirfile->d_name, dirname);
 			DIR *subdir = opendir(d);
 			createEntries(subdir, entries, str_table, d, offset);
