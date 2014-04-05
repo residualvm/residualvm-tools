@@ -24,7 +24,8 @@ MAKE := \
 	patchex \
 	diffr \
 	patchr \
-	bm2bmp
+	bm2bmp \
+	fixbik
 
 # 	these below are not added because they depend on the ppm and bpm libraries
 #	mat2ppm
@@ -118,6 +119,10 @@ include $(srcdir)/rules.mk
 
 TOOL := bm2bmp
 TOOL_OBJS := bm2bmp.o lab.o
+include $(srcdir)/rules.mk
+
+TOOL := fixbik
+TOOL_OBJS := fixbik.o
 include $(srcdir)/rules.mk
 
 .PHONY: clean-tools tools
